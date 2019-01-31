@@ -3,46 +3,20 @@ pipeline {
     stages {
         stage('One') {
                 steps {
-                        echo 'Hi, this is Zulaikha from edureka'
-			
+                        echo 'Hi, This is Aditi'
+            
                 }
         }
-	    stage('Two'){
-		    
-		steps {
-			input('Do you want to proceed?')
-        }
-	    }
-        stage('Three') {
-                when {
-                        not {
-                                branch "master"
-                        }
-                }
+        stage('Two') {
                 steps {
-			echo "Hello"
-                        }
+                        sh 'cd ~/Desktop/project-hq/caas/'
+                        sh 'source ../.environments/caas_env/bin/activate'
+                        sh 'python manage.py runserver'
+                        sh 'python test_runserver.py'
+            
+                }
         }
-        stage('Four') {
-                parallel {
-                        stage('Unit Test') {
-                                steps{
-                                        echo "Running the unit test..."
-                                }
-                        }
-                        stage('Integration test') {
-                        agent {
-                                docker {
-                                        reuseNode false
-					image 'ubuntu'
-                                        }
-			}
-				steps {
-					echo 'Running the integration test..'
-				}
-                               
-			}  }
-        }
+
     }
 }
-
+    
