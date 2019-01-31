@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Two') {
                 steps {
-                        sh 'cd ~/Desktop/project-hq/caas/'
+                        sh 'cd /home/delhivery/Desktop/project-hq/caas/'
                         sh 'source ../.environments/caas_env/bin/activate'
                         sh 'python manage.py runserver'
                         sh 'python test_runserver.py'
